@@ -1,0 +1,687 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Reddit Visualization (AKA "The Dandelion") </title>
+
+<!-- CSS Files -->
+<link type="text/css" href="base.css" rel="stylesheet" />
+<link type="text/css" href="Hypertree.css" rel="stylesheet" 
+/>
+
+<!-- JIT Library File -->
+<script language="javascript" type="text/javascript" 
+src="jit.js"></script>
+
+<!-- Example File -->
+
+<script language="javascript" type="text/javascript">
+
+
+var Log = {
+    elem: false,
+    write: function(text){
+        if (!this.elem) 
+            this.elem = document.getElementById('log');
+        this.elem.innerHTML = text;
+        this.elem.style.left = (500 - this.elem.offsetWidth / 2) + 'px';
+    }
+};
+
+function addEvent(obj, type, fn) {
+    if (obj.addEventListener) obj.addEventListener(type, fn, false);
+    else obj.attachEvent('on' + type, fn);
+};
+</script>
+
+<script language="javascript" type="text/javascript">
+
+function init(){
+    //init data
+    var json = {
+	"id": "1",
+	"name": "Reddit",
+	"data": {"data":"http://reddit.com"},
+	"children": [{
+		"id": "100",
+		"name": "trueReddit",
+		"data": {"data":"http://truereddit.reddit.com/"},
+		"children": []
+			},
+		{
+		"id" : "200",
+		"name": "newReddits",
+		"data": {"data": "http://newreddits.reddit.com/"},
+		"children" : []
+		},
+		{
+		"id" : "300",
+		"name": "Music",
+		"data": {"data": "http://music.reddit.com/"},
+		"children" : []
+		},
+		{
+		"id" : "400",
+		"name": "Drugs",
+		"data": {"data": "http://drugs.reddit.com/"},
+		"children" : [
+			{"id": "401",
+			"name":"cannabis",
+			"data" : {"data": "http://cannabis.reddit.com/"},
+			"children": []
+			},
+			{"id": "402",
+			"name":"marijuana",
+			"data" : {"data": "http://marijuana.reddit.com/"},
+			"children": []
+			},
+				]
+		},
+		{
+		"id" : "500",
+		"name": "Educational",
+		"data": {"data": "#"},
+		"children" : []
+		},
+		{
+		"id" : "700",
+		"name": "Usergenerated",
+		"data": {"data": "#"},
+		"children" : [
+			{"id": "701",
+			"name":"help",
+			"data" : {"data": "http://help.reddit.com/"},
+			"children": []
+			},
+			{"id": "702",
+			"name":"askreddit",
+			"data" : {"data": "http://askreddit.reddit.com/"},
+			"children": []
+			},
+			{"id": "703",
+			"name":"relationshipadvice",
+			"data" : {"data": "http://relationshipadvice.reddit.com/"},
+			"children": []
+			},
+			{"id": "704",
+			"name":"leaked",
+			"data" : {"data": "http://leaked.reddit.com/"},
+			"children": []
+			},
+
+
+
+
+				]
+		},
+		{
+		"id" : "800",
+		"name": "Other",
+		"data": {"data": "#"},
+		"children" : [
+			{"id": "801",
+			"name":"hipsters",
+			"data" : {"data": "http://hipsters.reddit.com/"},
+			"children": []
+			},
+			{"id": "802",
+			"name":"gifts",
+			"data" : {"data": "http://gifts.reddit.com/"},
+			"children": []
+			},
+			{"id": "803",
+			"name":"demolition",
+			"data" : {"data": "http://demolition.reddit.com/"},
+			"children": []
+			},
+			{"id": "804",
+			"name":"craigslist",
+			"data" : {"data": "http://craigslist.reddit.com/"},
+			"children": []
+			},
+			{"id": "805",
+			"name":"food",
+			"data" : {"data": "http://food.reddit.com/"},
+			"children": [
+				{"id": "820",
+				"name":"beer",
+				"data" : {"data": "http://beer.reddit.com/"},
+				"children": []
+				},
+				{"id": "821",
+				"name":"beer",
+				"data" : {"data": "http://cooking.reddit.com/"},
+				"children": []
+				},
+				{"id": "822",
+				"name":"recipes",
+				"data" : {"data": "http://recipes.reddit.com/"},
+				"children": []
+				},
+				{"id": "823",
+				"name":"tonightsdinner",
+				"data" : {"data": "http://tonightsdinner.reddit.com/"},
+				"children": []
+				},
+
+
+					]
+			},
+			{"id": "806",
+			"name":"todayilearned",
+			"data" : {"data": "http://todayilearned.reddit.com/"},
+			"children": []
+			},
+			{"id": "807",
+			"name":"philosophy",
+			"data" : {"data": "http://philosophy.reddit.com/"},
+			"children": []
+			},
+			{"id": "808",
+			"name":"auto",
+			"data" : {"data": "http://auto.reddit.com/"},
+			"children": []
+			},
+			{"id": "809",
+			"name":"architecture",
+			"data" : {"data": "http://architecture.reddit.com/"},
+			"children": []
+			},
+			{"id": "810",
+			"name":"design",
+			"data" : {"data": "http://design.reddit.com/"},
+			"children": []
+			},
+			{"id": "811",
+			"name":"nature",
+			"data" : {"data": "http://nature.reddit.com/"},
+			"children": [
+				{"id": "830",
+				"name":"gardening",
+				"data" : {"data": "http://gardening.reddit.com/"},
+				"children": []
+				},
+				{"id": "831",
+				"name":"organicgardening",
+				"data" : {"data": "http://organicgardening.reddit.com/"},
+				"children": []
+				},
+
+
+
+					]
+			},
+			{"id": "812",
+			"name":"wikipedia",
+			"data" : {"data": "http://wikipedia.reddit.com/"},
+			"children": []
+			},
+			{"id": "813",
+			"name":"opendirectories",
+			"data" : {"data": "http://opendirectories.reddit.com/"},
+			"children": []
+			},
+			{"id": "814",
+			"name":"guns",
+			"data" : {"data": "http://guns.reddit.com/"},
+			"children": []
+			},
+			{"id": "815",
+			"name":"diy",
+			"data" : {"data": "http://diy.reddit.com/"},
+			"children": []
+			},
+			{"id": "816",
+			"name":"selfsufficiency",
+			"data" : {"data": "http://selfsufficiency.reddit.com/"},
+			"children": []
+			},
+				]
+		},
+		{
+		"id" : "900",
+		"name": "Religion",
+		"data": {"data": "http://religion.reddit.com/"},
+		"children" : [
+			{"id": "901",
+			"name":"taoism",
+			"data" : {"data": "http://taoism.reddit.com/"},
+			"children": []
+			},
+			{"id": "902",
+			"name":"taoism",
+			"data" : {"data": "http://buddhism.reddit.com/"},
+			"children": []
+			},
+			{"id": "903",
+			"name":"taoism",
+			"data" : {"data": "http://christianity.reddit.com/"},
+			"children": []
+			},
+			{"id": "904",
+			"name":"scientology",
+			"data" : {"data": "http://scientology.reddit.com/"},
+			"children": []
+			},
+			{"id": "905",
+			"name":"atheism",
+			"data" : {"data": "http://atheism.reddit.com/"},
+			"children": []
+			},
+			{"id": "906",
+			"name":"freethought",
+			"data" : {"data": "http://freethought.reddit.com/"},
+			"children": []
+			},
+				]
+		},
+		{
+		"id" : "1000",
+		"name": "Videos",
+		"data": {"data": "http://videos.reddit.com/"},
+		"children" : [
+			{"id": "1001",
+			"name":"lectures",
+			"data" : {"data": "http://lectures.reddit.com/"},
+			"children": []
+			},
+			{"id": "1002",
+			"name":"video",
+			"data" : {"data": "http://video.reddit.com/"},
+			"children": []
+			},
+			{"id": "1003",
+			"name":"youtube",
+			"data" : {"data": "http://youtube.reddit.com/"},
+			"children": []
+			},
+			{"id": "1004",
+			"name":"documentaries",
+			"data" : {"data": "http://documentaries.reddit.com/"},
+			"children": []
+			},
+
+
+				]
+		},
+		{
+		"id" : "1100",
+		"name": "Rights",
+		"data": {"data": "#"},
+		"children" : [
+			{"id": "1101",
+			"name":"animalrights",
+			"data" : {"data": "http://animalrights.reddit.com/"},
+			"children": []
+			},
+			{"id": "1102",
+			"name":"equality",
+			"data" : {"data": "http://equality.reddit.com/"},
+			"children": []
+			},
+			{"id": "1103",
+			"name":"lgbt",
+			"data" : {"data": "http://lgbt.reddit.com/"},
+			"children": []
+			},
+			{"id": "1104",
+			"name":"transgeddit",
+			"data" : {"data": "http://transgeddit.reddit.com/"},
+			"children": []
+			},
+			{"id": "1105",
+			"name":"mensrights",
+			"data" : {"data": "http://mensrights.reddit.com/"},
+			"children": []
+			},
+			{"id": "1106",
+			"name":"snobs",
+			"data" : {"data": "http://snobs.reddit.com/"},
+			"children": []
+			},
+			{"id": "1107",
+			"name":"egalitarian",
+			"data" : {"data": "http://egalitarian.reddit.com/"},
+			"children": []
+			},
+			{"id": "1108",
+			"name":"feminism",
+			"data" : {"data": "http://feminism.reddit.com/"},
+			"children": []
+			},
+			{"id": "1109",
+			"name":"feminisms",
+			"data" : {"data": "http://feminisms.reddit.com/"},
+			"children": []
+			},
+
+				]
+		},
+		{
+		"id" : "1200",
+		"name": "For Fun",
+		"data": {"data": "#"},
+		"children" : []
+		},
+		{
+		"id" : "1300",
+		"name": "Health",
+		"data": {"data": "http://health.reddit.com/"},
+		"children" : [
+			{"id": "1301",
+			"name":"bipolarreddit",
+			"data" : {"data": "http://bipolarreddit.reddit.com/"},
+			"children": []
+			},
+			{"id": "1302",
+			"name":"fitness",
+			"data" : {"data": "http://fitness.reddit.com/"},
+			"children": [
+					{"id": "1303",
+					"name":"physicalfitness",
+					"data" : {"data": "http://physicalfitness.reddit.com/"},
+					"children": []
+					},
+
+				]
+			},
+			{"id": "1304",
+			"name":"acidrefluxanddiet",
+			"data" : {"data": "http://acidrefluxanddiet.reddit.com/"},
+			"children": []
+			},
+			{"id": "1305",
+			"name":"pandemic",
+			"data" : {"data": "http://pandemic.reddit.com/"},
+			"children": []
+			},
+
+
+				]
+		},
+		{
+		"id" : "1400",
+		"name": "NSFW",
+		"data": {"data": "http://nsfw.reddit.com/"},
+		"children" : [
+			{"id": "1401",
+			"name":"ass",
+			"data" : {"data": "http://ass.reddit.com/"},
+			"children": []
+			},	
+			{"id": "1402",
+			"name":"sex",
+			"data" : {"data": "http://sex.reddit.com/"},
+			"children": []
+			},				
+			{"id": "1403",
+			"name":"hugeboobs",
+			"data" : {"data": "http://hugeboobs.reddit.com/"},
+			"children": []
+			},
+			{"id": "1404",
+			"name":"shemale",
+			"data" : {"data": "http://shemale.reddit.com/"},
+			"children": []
+			},
+			{"id": "1405",
+			"name":"gonewild",
+			"data" : {"data": "http://gonewild.reddit.com/"},
+			"children": []
+			},
+			{"id": "1406",
+			"name":"nsfw_nospam",
+			"data" : {"data": "http://nsfw_nospam.reddit.com/"},
+			"children": []
+			},
+			{"id": "1407",
+			"name":"blowjobs",
+			"data" : {"data": "http://blowjobs.reddit.com/"},
+			"children": []
+			},
+			{"id": "1408",
+			"name":"amateur",
+			"data" : {"data": "http://amateur.reddit.com/"},
+			"children": []
+			},
+			{"id": "1409",
+			"name":"xsmall",
+			"data" : {"data": "http://xsmall.reddit.com/"},
+			"children": []
+			},
+			{"id": "1410",
+			"name":"the_nude",
+			"data" : {"data": "http://the_nude.reddit.com/"},
+			"children": []
+			},
+			{"id": "1411",
+			"name":"pornography",
+			"data" : {"data": "http://pornography.reddit.com/"},
+			"children": []
+			},
+			{"id": "1412",
+			"name":"boobies",
+			"data" : {"data": "http://boobies.reddit.com/"},
+			"children": []
+			},
+			{"id": "1413",
+			"name": "milf",
+			"data" : {"data": "http://milf.reddit.com/"},
+			"children": []
+			},
+			{"id": "1414",
+			"name": "sexy",
+			"data" : {"data": "http://sexy.reddit.com/"},
+			"children": []
+			},
+			{"id": "1415",
+			"name": "nsfwvideos",
+			"data" : {"data": "http://nsfwvideos.reddit.com/"},
+			"children": []
+			},
+			{"id": "1416",
+			"name": "penis",
+			"data" : {"data": "http://penis.reddit.com/"},
+			"children": []
+			},
+			{"id": "1417",
+			"name": "jailbait",
+			"data" : {"data": "http://jailbait.reddit.com/"},
+			"children": [
+					{"id": "1418",
+						"name": "jailbait_nospam",
+					"data" : {"data": "http://jailbait_nospam.reddit.com/"},
+					"children": []
+					},
+
+				]
+			},
+
+
+
+				]
+		},
+		{
+		"id" : "1500",
+		"name": "Technology",
+		"data": {"data": "http://technology.reddit.com/"},
+		"children" : []
+		},
+
+
+
+
+			  ]
+};
+
+
+    var infovis = document.getElementById('infovis');
+    var w = infovis.offsetWidth - 50, h = infovis.offsetHeight - 50;
+    
+    //init canvas
+    //Create a new canvas instance.
+    var canvas = new Canvas('mycanvas', {
+        'injectInto': 'infovis',
+        'width': w,
+        'height': h
+    });
+    //end
+    var style = document.getElementById('mycanvas').style;
+    style.marginLeft = style.marginTop = "25px";
+    //init Hypertree
+    var ht = new Hypertree(canvas, {
+        //Change node and edge styles such as
+        //color, width and dimensions.
+        Node: {
+            dim: 10,
+            color: "#f00"
+        },
+        
+        Edge: {
+            lineWidth: 2,
+            color: "#088"
+        },
+        
+        onBeforeCompute: function(node){
+            Log.write("centering");
+    
+        },
+        //Attach event handlers and add text to the
+        //labels. This method is only triggered on label
+        //creation
+        onCreateLabel: function(domElement, node){
+            domElement.innerHTML = node.name;
+    addEvent(domElement, 'click', function () {
+                ht.onClick(node.id);
+        
+            });
+        },
+        //Change node styles when labels are placed
+        //or moved.
+        onPlaceLabel: function(domElement, node){
+            var style = domElement.style;
+            style.display = '';
+            style.cursor = 'pointer';
+            if (node._depth <= 1) {
+                style.fontSize = "0.8em";
+                style.color = "#ddd";
+
+            } 
+
+             else {
+                style.display = 'none';
+            }
+
+            var left = parseInt(style.left);
+            var w = domElement.offsetWidth;
+            style.left = (left - w / 2) + 'px';
+        },
+        
+        onAfterCompute: function(){
+            Log.write("done");
+            
+            //Build the right column relations list.
+            //This is done by collecting the information (stored in the data property) 
+            //for all the nodes adjacent to the centered node.
+            var node = Graph.Util.getClosestNodeToOrigin(ht.graph, "pos");
+        var html = "<h4>" + node.name + "</h4>";
+        var left = "<h4>" + node.name + "</h4>";
+
+        var iscont=false;
+        var iscontry=false; 
+            Graph.Util.eachAdjacency(node, function(adj){
+                var child = adj.nodeTo;
+                if (child && child.data.data!="Continent" && child.data.data!="The World"){
+        iscont=true;
+                    var rel =  child.data;
+        
+        //alert(node.name);
+                    html +="<li><a href = " + child.data.data + ' >';
+            html +=child.name+'</a></li><br>';
+            
+            //html +=child.name+'  >';   
+                }
+    if(node.data.data){}
+    else iscontry=true;
+            });
+
+
+
+           if(iscont){
+ document.getElementById('inner-details').innerHTML = html;
+}
+    else if(iscontry){
+     document.getElementById('left-container').innerHTML = left;
+         document.getElementById('inner-details').innerHTML = "Select nodes";
+    } 
+else{
+    document.getElementById('inner-details').innerHTML = "Select nodes";
+    var html2 = "<h4> Reddit Visualization </h4>";
+    html2 +="Click on the nodes to navigate.";
+    document.getElementById('left-container').innerHTML = html2;   
+    }
+/*  var html2 ="<h4>"+node.data+"</h4>";
+    html2 +="<p> Welcome to the World Visualization! Click on nodes to navigate and click the compare buttons on the right to compare by area</p>";
+        document.getElementById('left-container').innerHTML = left;
+    //put information on SQL query on this object
+    //if the object.data is continent or world, then aggregate informaiton otherwise just print it out
+  */
+    }
+    });
+
+    //load JSON data.
+    ht.loadJSON(json);
+    //compute positions and plot.
+    ht.refresh();
+    //end
+    ht.controller.onAfterCompute();
+}
+
+function goto(a){
+ht.onClick(a)
+}
+
+
+
+
+</script>
+
+
+
+<style type='text/css'> #turnkey-credit { font-family: Tahoma,Sans,Arial,Helvetica,Verdana,sans-serif; font-size: 11px; text-align: center; } #turnkey-credit a { text-decoration: none; } #turnkey-credit a:hover { text-decoration: underline; } </style></head>
+
+
+
+<body onload="init();">
+<div id="top">
+<h1>Reddit Visualization (AKA "The Dandelion")</h1>
+</div>
+<div id="container">
+
+
+<div id="left-container">
+
+
+
+<div style="text-align:center;"></div>            
+</div>
+
+<div id="center-container">
+    <div id="infovis"></div>    
+</div>
+
+<div id="right-container">
+
+<div id="inner-details"></div>
+
+</div>
+
+<div id="log"></div>
+</div>
+<div id"=lower-container">
+Made with:
+<a href="http://thejit.org/">JIT toolkit hypertree </a>
+Michael Chrisco <a href="mailto:michaelachrisco@gmail.com">michaelachrisco@gmail.com</a> </div>
+
+
+</html>
