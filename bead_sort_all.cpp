@@ -5,6 +5,7 @@
 //so all in all, the bead sort is still (O(S) where is is the summation of negative and positive bead sort algorithms
 //space complexity is now O(5n) where 1 array is set and the others are expandable. if lists were used, it could
 //probably be faster and better for insertion later but since I am only proving correctness, this will do.
+//As seen here: http://rosettacode.org/wiki/User_talk:MichaelChrisco#Bead_sort:_a_Unique_Solution
 
 
 
