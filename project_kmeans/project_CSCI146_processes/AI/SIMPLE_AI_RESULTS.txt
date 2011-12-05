@@ -1,0 +1,4 @@
+17c17
+< shsimple_AI.bash
+---
+> ./test

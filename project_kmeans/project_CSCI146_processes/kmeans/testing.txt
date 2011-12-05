@@ -1,0 +1,3 @@
+plot "points_100.txt","test01_centers.txt"
+
+
