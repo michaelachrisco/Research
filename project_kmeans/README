@@ -2,7 +2,7 @@ Michael Chrisco
 information about the k-means script
 DEPENDENCIES:
 This system was made and tested with Debian. 
-1)gnuplot (you can do a sudo-apt-get install gnuplot)
+1)gnuplot (you can do a sudo apt-get install gnuplot)
 2)update your system before running the scripts.
 
 To run the script, go into the directory for the script and type either sh Main.bash
